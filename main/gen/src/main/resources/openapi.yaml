@@ -1,0 +1,81 @@
+openapi: 3.0.1
+info:
+  description: API to manage books (get and create books).
+  title: Book API
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /books/:
+    get:
+      description: Retrieve all books from the system.
+      operationId: listBooks
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Book'
+                type: array
+          description: A list of books
+        "404":
+          description: No books found
+        "500":
+          description: Internal server error
+      summary: Get a list of books
+      x-accepts:
+      - application/json
+  /books/{bookId}:
+    get:
+      description: Retrieve a book from the system.
+      operationId: getBookById
+      parameters:
+      - description: The ID of the book to retrieve.
+        explode: false
+        in: path
+        name: bookId
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+          description: A Book by ID
+        "404":
+          description: Not found
+        "500":
+          description: Internal server error
+      summary: Get a book by ID
+      x-accepts:
+      - application/json
+components:
+  schemas:
+    Book:
+      example:
+        author: author
+        description: description
+        id: 0.8008281904610115
+        title: title
+      properties:
+        id:
+          description: unique id of book
+          type: number
+        title:
+          description: title of the book
+          type: string
+        author:
+          description: Author of the book
+          type: string
+        description:
+          description: decription of the book
+          type: string
+      required:
+      - author
+      - id
+      - title
+      type: object

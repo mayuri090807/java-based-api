@@ -1,0 +1,37 @@
+# General Configuration
+replicaCount: 2
+
+# Image configuration
+image:
+  repository: us-central1-docker.pkg.dev/powerful-host-457504-t6/mk-books-api/books-api
+  tag: v2
+
+# Service Configuration
+service:
+  port: 80
+  targetPort: 8080
+  type: LoadBalancer
+  loadBalancerIP: ""  # Optional: Specify a static IP for LoadBalancer, or leave it empty for dynamic assignment
+
+serviceAccount:
+  create: true  # Set this to false if you want to use an existing ServiceAccount
+  name: ""      # Leave empty for auto-generated ServiceAccount name
+
+ingress:
+  enabled: false  # Set to true to enable Ingress
+
+autoscaling:
+  enabled: true  # Set to true to enable autoscaling (HPA)
+  minReplicas: 1  # Minimum number of replicas
+  maxReplicas: 2  # Maximum number of replicas
+  targetCPUUtilizationPercentage: 80  # Target CPU utilization for scaling
+
+# Additional settings for your app, if needed (optional)
+# resource requests & limits, environment variables, etc. can be defined below
+# resources:
+#   requests:
+#     cpu: 100m
+#     memory: 128Mi
+#   limits:
+#     cpu: 200m
+#     memory: 256Mi
