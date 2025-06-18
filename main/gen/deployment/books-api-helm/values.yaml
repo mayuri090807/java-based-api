@@ -3,7 +3,7 @@ replicaCount: 2
 
 # Image configuration
 image:
-  repository: us-central1-docker.pkg.dev/powerful-host-457504-t6/mk-books-api/books-api
+  repository: us-central1-docker.pkg.dev/<gcp-project-id>/mk-books-api/books-api
   tag: v2
 
 # Service Configuration
